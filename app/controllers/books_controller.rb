@@ -1,4 +1,6 @@
 class BooksController < ApplicationController
+  before_action :find_book, only: [:show, :edit, :update, :destroy]
+  before_action :find_author, only: [:update, :create]
 
   def new
     @book = Book.new
@@ -9,17 +11,10 @@ class BooksController < ApplicationController
   end
 
   def show
-    @book = Book.find(params[:id])
-  end
-
-  def edit
-    @book = Book.find(params[:id])
   end
 
   def update
-    @book = Book.find(params[:id])
-
-    if @book.update (book_params)
+    if @book.update_attributes(book_params.merge({ author_id: @author.id}))
       redirect_to @book
     else
       render 'edit'
@@ -27,7 +22,6 @@ class BooksController < ApplicationController
   end
 
   def destroy
-    @book = Book.find(params[:id])
     @book.destroy
 
     redirect_to books_path
@@ -36,6 +30,7 @@ class BooksController < ApplicationController
   def create
     @book = Book.new(book_params)
 
+    @book.author = @author
     if @book.save
       redirect_to @book
     else
@@ -44,8 +39,15 @@ class BooksController < ApplicationController
   end
 
   private
-   def book_params
-    params.require(:book).permit(:title, :author, :description, :publication)
-   end
+  def book_params
+    params.require(:book).permit(:title, :description, :publication)
+  end
 
+  def find_book
+    @book = Book.find(params[:id])
+  end
+
+  def find_author
+    @author = Author.find_or_create_by(name: params[:book][:author_name].strip)
+  end
 end
