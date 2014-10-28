@@ -1,12 +1,15 @@
 <h1>Listing books</h1>
 
 <%= form_tag books_path, :method => 'get' do %>
-	<p>
-		<%= text_field_tag :search, params[:search] %>
-		<%= submit_tag "Search", :name => nil %>
-	</p>
+  <p>
+    <%= text_field_tag :search, params[:search] %>
+    <%= submit_tag "Search", :name => nil %>
+  </p>
 <% end %>
+
+
 <%= link_to 'Add new book', new_book_path %>
+<% if @books.count > 0 %>
 <table>
 	<tr>
 		<th>Title</th>
@@ -28,3 +31,6 @@
 	</tr>
 	<% end %>
 </table>
+<% else %>
+  <p>No items found!</p>
+<% end %>

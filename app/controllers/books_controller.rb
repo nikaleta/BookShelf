@@ -7,11 +7,16 @@ class BooksController < ApplicationController
   end
 
   def index
-    @books = Book.all
+    if params[:search]
+      @books = Book.search(params[:search])
+    else
+      @books = Book.all
+    end
   end
 
   def show
   end
+
 
   def update
     if @book.update_attributes(book_params.merge({ author_id: @author.id}))
