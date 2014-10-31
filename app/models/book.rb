@@ -1,5 +1,6 @@
 class Book < ActiveRecord::Base
 	belongs_to :author
+	belongs_to :user
 	validates :title, presence:true
 	validates :author_id, presence:true
 

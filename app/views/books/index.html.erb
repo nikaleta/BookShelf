@@ -1,5 +1,12 @@
+<div class="container">
+  <div class="jumbotron">
+    <img class="img-responsive" img-center style="width: 310px; margin:auto;"
+    src="http://upload.wikimedia.org/wikipedia/commons/thumb/0/04/Bookshelf-40x20_blue.svg/1280px-Bookshelf-40x20_blue.svg.png">
 <h1>Listing books</h1>
-
+<p>
+  <% if can? :create, @book %>
+    <p><%= link_to "New Book", new_book_path %></p>
+  <% end %>
 <%= form_tag books_path, :method => 'get' do %>
   <p>
     <%= text_field_tag :search, params[:search] %>
@@ -7,8 +14,14 @@
   </p>
 <% end %>
 
+  <% if can? :update, @book %>
+    <%= link_to "Edit", edit_book_path(@book) %> |
+  <% end %>
+  <% if can? :destroy, @book %>
+    <%= link_to "Destroy", @book, :method => :delete, :confirm => "Are you sure?" %> |
+  <% end %>
+</p>
 
-<%= link_to 'Add new book', new_book_path %>
 <% if @books.count > 0 %>
 <table>
 	<tr>
@@ -25,12 +38,20 @@
 		<td><%= book.author.name %></td>
 		<td><%= book.description %></td>
 		<td><%= book.publication %></td>
-		<td><%= link_to 'Show', book_path(book) %></td>
-		<td><%= link_to 'Edit', edit_book_path(book) %></td>
-		<td><%= link_to 'Delete', book_path(book), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+		<td><p style="font-size:20px; padding-left:10px;"><%= link_to "Show", book_path(book) %></p></td>
+    <td><p style="font-size:20px; padding-left:10px;"><%= link_to "Edit", edit_book_path(book) if can? :manage, book %></p></td>
+    <td><p style="font-size:20px; padding-left:10px;"><%= link_to "Delete", book_path(book),
+                          method: :delete, data: { Confirm: "Are you sure?"} if can? :destroy, book %></p></td>
+    <td><p style="font-size:20px; padding-left:10px;"><%= link_to "New", new_book_path if can? :create, book %></p></td>
 	</tr>
 	<% end %>
 </table>
 <% else %>
   <p>No items found!</p>
 <% end %>
+<a href="http://0.0.0.0:3000/">Home</a>
+
+
+
+</div>
+</div>

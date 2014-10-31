@@ -2,19 +2,25 @@ class BooksController < ApplicationController
   before_action :find_book, only: [:show, :edit, :update, :destroy]
   before_action :find_author, only: [:update, :create]
 
+
   def new
     @book = Book.new
+    authorize! :new, @book
   end
 
   def index
-    if params[:search]
+    if params[:search].present?
       @books = Book.search(params[:search])
     else
       @books = Book.all
     end
   end
 
+  def edit
+    authorize! :edit, @book
+  end
   def show
+
   end
 
 
@@ -27,12 +33,14 @@ class BooksController < ApplicationController
   end
 
   def destroy
+    authorize! :destroy, @book
     @book.destroy
 
     redirect_to books_path
   end
 
   def create
+
     @book = Book.new(book_params)
 
     @book.author = @author

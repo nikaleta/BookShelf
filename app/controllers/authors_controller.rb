@@ -2,11 +2,21 @@ class AuthorsController < ApplicationController
 	def new
 	end
 
+	def destroy
+  	@author = Author.find(params[:id])
+  	@author.destroy
+
+  	redirect_to authors_path
+	end
+
 	def create
 		@author = Author.new(author_params)
-		@author.save
-		redirect_to @author
-  end
+		if @author.save
+    	redirect_to @author
+  	else
+    	render 'new'
+  	end
+	end
 
 	def show
   	@author = Author.find(params[:id])

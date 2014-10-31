@@ -1,4 +1,4 @@
-
+<div style="float:left;" >
 <%= form_for @book do |f| %>
 
 	<% if @book.errors.any? %>
@@ -34,3 +34,5 @@
 		<%= f.submit %>
 	</p>
 <% end %>
+<p style="font-size:24px;"><%= link_to 'Back', books_path %></p>
+</div>
