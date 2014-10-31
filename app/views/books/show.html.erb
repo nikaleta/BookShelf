@@ -1,42 +1,57 @@
+<style>
+.part_right{
+	float:right;
+}
+
+.part_left{
+	float:left;
+}
+.part_right{
+	margin-top:20px;
+  height: 180px;
+  width: 180px;
+}
+.wrapper_show{
+	width:700px;
+	margin:auto;
+}
+
+</style>
+
 <div class="container">
-	<div class="jumbotron">
-		<div style="float:left;">
+	<div class="wrapper_show">
+	<div class="part_left">
+	<ul class="nav nav-pills">
+		<li class="active"><% if can? :update, @book %>
+			<%= link_to "Edit", edit_book_path(@book) %>
+		<% end %></li>
+		<li class="active"><% if can? :destroy, @book %>
+			<%= link_to "Delete", @book, :method => :delete, :confirm => "Are you sure?" %>
+		<% end %></li>
+		<li class="active"><% if can? :create, @book %>
+			<%= link_to "New Book", new_book_path %>
+		<% end %></li>
+	</ul>
 <h1>Book</h1>
 <p>
 	<strong>Title:</strong>
 	<%= @book.title %>
 </p>
-
 <p>
 	<strong>Author:</strong>
 	<%= @book.author.name %>
 </p>
-
 <p>
 	<strong>Description:</strong>
 	<%= @book.description %>
 </p>
-
 <p>
 	<strong>Publication:</strong>
 	<%= @book.publication %>
 </p>
-
-<p>
-	<% if can? :create, @book %>
-		<p><%= link_to "New Book", new_book_path %></p>
-	<% end %>
-	<% if can? :update, @book %>
-		<%= link_to "Edit", edit_book_path(@book) %> |
-	<% end %>
-	<% if can? :destroy, @book %>
-		<%= link_to "Destroy", @book, :method => :delete, :confirm => "Are you sure?" %> |
-	<% end %>
-	<%= link_to "Back to Books", books_path %>
-</p>
 </div>
-<img class="img-responsive"  style="width: 310px; float:right;" src="http://www.nybooks.com/media/static/assets/_assets/img/common/suggest-title.png">
-
-
+<p class="part_right">
+	<%= image_tag @book.cover.url(:small) %>
+</p>
 </div>
 </div>

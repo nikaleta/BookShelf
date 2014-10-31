@@ -10,38 +10,89 @@
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 </head>
 <body>
+
   <nav class="navbar navbar-inverse" role="navigation" style="min-height: 64px;">
    <div class="navbar-header">
       <a class="navbar-brand" href="https://www.yopeso.com/en/home/">
-        <img class="img-responsive"  style="width: 130px; " src="https://www.yopeso.com/files/3213/9953/9575/logo.png">
+        <img class="img-responsive" src="/assets/logo.png">
 </a>
-
    </div>
    <div>
+<style>
+
+  .form-control{
+    width:700px;
+    float:left;
+    margin-top: 14px;
+    background:black;
+    border-color:#2a6496;
+  }
+  .btn-default{
+    margin-top: 14px;
+    color:#777;
+    background:black;
+    border-color:#2a6496;
+  }
+  .btn-default:hover{
+    color:white;
+    background:black;
+    border-color:#2a6496;
+  }
+  .nav_text{
+    font-size:24px;
+    margin-top:5px;
+  }
+  .img-responsive{
+    width: 130px;
+    margin-top: -5px;
+  }
+  .navbar-link{
+    font-size:24px;
+  }
+.wrapper{
+  margin:auto;
+  width:300px;
+}
+.form_login{
+  border-radius:4px;
+  border: 1px solid #2a6496;
+  padding-left:10px;
+  width:300px;
+}
+.welcome{
+  
+}
+
+</style>
       <ul class="nav navbar-nav">
-         <li style=" font-size:30px;"><a href="http://0.0.0.0:3000/books">Books</a></li>
-         <li style=" font-size:30px;"><a href="http://0.0.0.0:3000/authors/">Authors</a></li>
+         <li class="nav_text"><a href="http://0.0.0.0:3000/">Home</a></li>
+         <li class="nav_text"><a href="http://0.0.0.0:3000/books/">Books</a></li>
+         <li><%= form_tag books_path, :method => 'get' do %>
+           <p>
+             <%= text_field_tag :search, params[:search], :placeholder => "Search Book",  :class => "form-control" %>
+             <%= submit_tag "Submit", :name => nil,  :class => "btn btn-default" %>
+           </p>
+         <% end %></li>
+         <li clas="wrapper">
+         <p class="navbar-text pull-up" >
+         <% if user_signed_in? %>
+         Logged in as <strong><%= current_user.email %></strong>.
+         <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %> |
+         <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
+         <% else %>
+         <%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link' %> |
+         <%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %>
+         <% end %>
+         </p>
+         </li>
       </ul>
    </div>
 </nav>
-<div class="container">
-<div class="jumbotron" style="width: 1210px; padding-top:0px;">
 
 <p class="notice"><%= notice %></p>
 <p class="alert"><%= alert %></p>
 <%= yield %>
-<p class="navbar-text pull-up" style="color:red;">
-<% if user_signed_in? %>
-Logged in as <strong><%= current_user.email %></strong>.
-<%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %> |
-<%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
-<% else %>
-<%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %> |
-<%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %>
-<% end %>
-</p>
-</div>
-</div>
+
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>

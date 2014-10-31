@@ -1,4 +1,22 @@
-<div style="float:left;" >
+<style>
+  .form_input{
+		border-radius:4px;
+		border: 1px solid #2a6496;
+		width:650px;
+		padding-left:10px;
+
+	}
+	.form_input_diff{
+		border-radius:4px;
+		border: 1px solid #2a6496;
+		width:650px;
+		height:200px;
+		padding-left:10px;
+
+	}
+</style>
+
+<div class="form_view">
 <%= form_for @book do |f| %>
 
 	<% if @book.errors.any? %>
@@ -16,19 +34,22 @@
 
 	<p>
 		<%= f.label :title %><br>
-		<%= f.text_field :title %>
+		<%= f.text_field :title, :placeholder => "Right the title of the book", :class => "form_input"%>
 	</p>
 	<p>
 		<%= label_tag :author %><br>
-		<%= text_field_tag 'book[author_name]', @book.author.try(:name) %>
+		<%= text_field_tag 'book[author_name]', @book.author.try(:name), :placeholder => "Right the author name", :class => "form_input" %>
 	</p>
 	<p>
 		<%= f.label :description %><br>
-		<%= f.text_area :description %>
+		<%= f.text_area :description, :placeholder => "Right the description of the book", :class => "form_input_diff" %>
 	</p>
 	<p>
 		<%= f.label :publication %><br>
-		<%= f.text_field :publication %>
+		<%= f.text_field :publication,:placeholder => "Right the publication year", :class => "form_input" %>
+	</p>
+	<p>
+		<%= f.file_field :cover %>
 	</p>
 	<p>
 		<%= f.submit %>

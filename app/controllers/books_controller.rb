@@ -34,6 +34,8 @@ class BooksController < ApplicationController
 
   def destroy
     authorize! :destroy, @book
+  
+
     @book.destroy
 
     redirect_to books_path
@@ -42,7 +44,6 @@ class BooksController < ApplicationController
   def create
 
     @book = Book.new(book_params)
-
     @book.author = @author
     if @book.save
       redirect_to @book
@@ -53,7 +54,7 @@ class BooksController < ApplicationController
 
   private
   def book_params
-    params.require(:book).permit(:title, :description, :publication)
+    params.require(:book).permit(:cover, :title, :description, :publication)
   end
 
   def find_book

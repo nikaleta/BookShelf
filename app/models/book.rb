@@ -4,6 +4,11 @@ class Book < ActiveRecord::Base
 	validates :title, presence:true
 	validates :author_id, presence:true
 
+	has_attached_file :cover, styles: {small: "500*500#"}
+	validates_attachment_presence :cover
+	validates_attachment_size :cover, :less_than => 5.megabytes
+	validates_attachment_content_type :cover, :content_type => ['image/jpeg', 'image/png']
+
 	def self.search(search)
     if search
 			where('title ILIKE ? OR description ILIKE ? OR authors.name ILIKE ?', "%#{search}%", "%#{search}%", "%#{search}%")
