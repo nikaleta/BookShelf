@@ -64,11 +64,11 @@
 
 
 <td class="table_styling">
-	<%= link_to book.author.name, author_path(book)  %>
+	<%= link_to book.author.name, author_path(book.author)  %>
 	</td>
 
 
-<td class="table_styling" style="width:80px;">
+<td class="table_styling" style="width:100px;">
 
 	<% book.genres.each do |genre| %>
 	<%= link_to genre.title, genre_path(genre) %>

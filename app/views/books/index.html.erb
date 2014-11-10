@@ -69,18 +69,18 @@
 
 
 		<td class="table_styling">
-      <%= link_to book.author.name, author_path(book) %>
+      <%= link_to book.author.name, author_path(book.author) %>
       </td>
 
 
-    <td class="table_styling" style="width:80px;">
+    <td class="table_styling" style="width:100px;">
 
       <% book.genres.each do |genre| %>
       <%= link_to genre.title, genre_path(genre) %>
       <% end %>
     </td>
 		<td class="table_styling" style="width:500px;"><%= book.description %></td>
-		<td class="table_styling" style="width:100px; text-align:center;"><%= book.publication %></td>
+		<td class="table_styling" style="width:100px; text-align:center; color:#428BCA;"><%= book.publication %></td>
 		<td><p class="option_button"><%= link_to "Edit", edit_book_path(book) if can? :manage, book %></p>
     <p class="option_button"><%= link_to "Delete", book_path(book),
                           method: :delete, data: { Confirm: "Are you sure?"} if can? :destroy, book %></p></td>

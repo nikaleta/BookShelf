@@ -21,6 +21,7 @@ user1 = User.create(email: "nicoleta@gmail.com", password: "1234", role: "admin"
 
 # Book creation
 
+
 Book.create(
 
     title: "JavaScript: The Good Parts",
@@ -32,7 +33,7 @@ Book.create(
     author: @author1,
 
 
-		genres: [Genre.create(title: "Programming Languages")]
+		genres: [Genre.create(title: "Programming, Science")]
 
 )
 
@@ -60,7 +61,7 @@ Book.create(
 
     author: @author2,
 
-    genres: [Genre.create(title: "Science, Non Fiction, Natural History")]
+    genres: [Genre.create(title: "Science")]
 
 )
 
@@ -74,7 +75,7 @@ Book.create(
 
     author: @author1,
 
-    genres: [Genre.create(title: "Programming, Science")]
+    genres: [Genre.create(title: "Programming")]
 
 )
 
@@ -102,7 +103,7 @@ Book.create(
 
     author: @author3,
 
-    genres: [Genre.create(title: "Programming")]
+    genres: Genre.create(title: "Programming")
 
 )
 
