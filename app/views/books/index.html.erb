@@ -1,36 +1,89 @@
 <style>
+.cover{
+  width:80px;
+  height:100px;
+  margin-top:10px;
+  margin-bottom:10px;
+}
+.option_button a{
+  color: #FFF;
+  display: block;
+  width: 54px;
+  height: 20px;
+  background-color: #428BCA;
+  border-radius: 4px;
+  margin-left: 20px;
+  text-align: center;
+  line-height: 20px;
+  }
+.table_styling{
+  padding-left:10px;
+  border-bottom: 1px solid #428BCA;
+  padding-right:10px;
+}
+.table_top{
+  border: 2px solid #428BCA;
+  text-align:center;
+  font-size:24px;
+  color:#428BCA;
+}
+.wrapper_list{
+  margin-left:300px;
+}
+.button_create a{
+  color: #FFF;
+  display:block;
+  width: 140px;
+  height: 36px;
+  background-color: #428BCA;
+  border-radius: 4px;
+  text-align: center;
+  line-height: 36px;
+  font-size: 18px;
+}
 
 </style>
 
-<div class="container">
-  <ul class="nav nav-pills">
-    <li class="active"><a href="#">Menu 1</a></li>
-    <li class="active"><a href="#">Menu 1</a></li>
-    <li class="active"><a href="#">Menu 2</a></li>
-    <li class="active"><a href="#">Menu 3</a></li>
-  </ul>
-<h1>Listing books</h1>
+<div class="wrapper_list">
+
+<h1>Current Books on the Shelf</h1>
 
 <% if @books.count > 0 %>
 <table>
 	<tr>
-		<th>Title</th>
-		<th>Author</th>
-		<th>Description</th>
-		<th>Publication</th>
-		<th colspan="4"></th>
+    <th></th>
+		<th class="table_top">Title</th>
+		<th class="table_top">Author</th>
+    <th class="table_top">Genre</th>
+    <th class="table_top">Description</th>
+		<th class="table_top">Publication</th>
+		<th colspan="5"></th>
 	</tr>
+  <p class="button_create"><%= link_to "Add New Book", new_book_path if can? :create, Book %></p>
 	<% @books.each do |book| %>
 	<tr>
-		<td><%= book.title %></td>
-		<td><%= book.author.name %></td>
-		<td><%= book.description %></td>
-		<td><%= book.publication %></td>
-		<td><p><%= link_to "Show", book_path(book) %></p></td>
-    <td><p><%= link_to "Edit", edit_book_path(book) if can? :manage, book %></p></td>
-    <td><p><%= link_to "Delete", book_path(book),
+    <td>
+      <%= image_tag book.cover.url, :class =>"cover" %>
+    </td>
+		<td class="table_styling" style="width:300px;"><%= link_to book.title, book_path(book) %></td>
+
+
+		<td class="table_styling">
+      <%= link_to book.author.name, author_path(book) %>
+      </td>
+
+
+    <td class="table_styling" style="width:80px;">
+
+      <% book.genres.each do |genre| %>
+      <%= link_to genre.title, genre_path(genre) %>
+      <% end %>
+    </td>
+		<td class="table_styling" style="width:500px;"><%= book.description %></td>
+		<td class="table_styling" style="width:100px; text-align:center;"><%= book.publication %></td>
+		<td><p class="option_button"><%= link_to "Edit", edit_book_path(book) if can? :manage, book %></p>
+    <p class="option_button"><%= link_to "Delete", book_path(book),
                           method: :delete, data: { Confirm: "Are you sure?"} if can? :destroy, book %></p></td>
-    <td><p><%= link_to "New", new_book_path if can? :create, book %></p></td>
 	</tr>
 	<% end %>
 </table>

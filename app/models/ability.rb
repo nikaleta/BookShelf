@@ -1,14 +1,13 @@
 class Ability
   include CanCan::Ability
   def initialize(user)
-  if user.nil?
-    can :read, Book
-  else
-    can :manage, Book
-  end
 
-
-
+if user
+   can :manage, :all if user.role == "admin"
+   can :manage, Book if user.role == 'moderator'
+ else
+   can :read, :all
+end
     # The first argument to `can` is the action you are giving the user
     # permission to do.
     # If you pass :manage it will apply to every action. Other common actions

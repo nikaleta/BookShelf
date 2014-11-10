@@ -8,8 +8,6 @@
   <% @authors.each do |author| %>
     <tr>
       <td><%= author.name %></td>
-      <td><%= link_to 'Destroy', author_path(author),
-                    method: :delete, data: { confirm: 'Are you sure?' } %></td>
     </tr>
   <% end %>
 </table>

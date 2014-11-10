@@ -1,5 +1,6 @@
 class AuthorsController < ApplicationController
 	def new
+		@author = Author.new
 	end
 
 	def destroy
@@ -22,9 +23,9 @@ class AuthorsController < ApplicationController
   	@author = Author.find(params[:id])
 	end
 
- def index
-  @authors = Author.all
-end
+  def index
+ 		@authors = Author.all
+	end
 
 	private
   def author_params
