@@ -1,7 +1,7 @@
 # BookShelf
 
 The BookShelf is an online library, where users can access books depending on their rights.
-User can read books being guest only, or even update them(add, delete, edit), but after signing in.
+User can read books, or even update them(add, delete, edit), if authorized.
 Also signed in user is available to rate the quality of the existing books.
 
 For making it easier, to find some specific book, there is a search form, which is searching by author, title or
@@ -11,13 +11,13 @@ accordingly.
 
 ## Used Gems
 
-* 'Device' - for implementing authentication [(https://github.com/plataformatec/devise)]
+* 'Device' - for implementing authentication (https://github.com/plataformatec/devise)
 
-* 'CanCan' - for implementing the authorization functionality (roles and permission) [(https://github.com/ryanb/cancan)]
+* 'CanCan' - for implementing the authorization functionality (roles and permission) (https://github.com/ryanb/cancan)
 
-* 'Paperclip' - for implementing the uploading image functionality [(https://github.com/thoughtbot/paperclip)]
+* 'Paperclip' - for implementing the uploading image functionality (https://github.com/thoughtbot/paperclip)
 
-* 'Ratyrate' - for implementing the rating functionality [(https://github.com/wazery/ratyrate)]
+* 'Ratyrate' - for implementing the rating functionality (https://github.com/wazery/ratyrate)
 
 For implementing 'search' functionality was used SQL LIKE.
 
