@@ -1,4 +1,5 @@
-# BookShelf
+#
+BookShelf
 
 The BookShelf is an online library, where users can access books depending on their rights.
 User can read books being guest only, or even update them(add, delete, edit), but after signing in.
@@ -39,7 +40,9 @@ For this application was used postgresql.
 
 ```
 adapter: postgresql
+
 username: YOUR_USER_NAME
+
 password: YOUR_PASSWORD
 ```
 
@@ -54,4 +57,5 @@ password: YOUR_PASSWORD
 ### To seed the database with default values:
 
 `rake db:seed`
+
 Last command will create in database all that is contained it ```seed.rb``` file, to make possible to test the application.
