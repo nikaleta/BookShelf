@@ -21,18 +21,4 @@ class Book < ActiveRecord::Base
     end
   end
 
-
-def authors
-	if request.post? then
-		@authors = params[:search]
-	end
-end
-
-def find_genres
-	genre_titles = params[:book][:genre_titles].try(:split, ",").map(&:strip)
-	@genres = []
-	genre_titles.each do |title|
-		@genres << Genre.find_or_create_by(title: title)
-	end
-end
 end
