@@ -35,7 +35,8 @@ git clone https://github.com/nikaleta/BookShelf
 ### To set up the database the following steps are necessary:
 
 For this application was used postgresql.
-1. Feel the fields in /config/database.yml file:
+
+Feel the fields in /config/database.yml file:
 
 ```
 adapter: postgresql
