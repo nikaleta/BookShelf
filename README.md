@@ -1,4 +1,4 @@
-# **BookShelf**
+# BookShelf
 
 The BookShelf is an online library, where users can access books depending on their rights.
 User can read books being guest only, or even update them(add, delete, edit), but after signing in.
