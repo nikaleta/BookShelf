@@ -65,14 +65,11 @@ class BooksController < ApplicationController
   end
 
   def find_genres
-    genre_titles = params[:book][:genre_titles].try(:split, ",").map(&:strip)
+    genre_titles = params[:book][:genre_titles].try(:split, ",").map(&:strip).map!(&:capitalize)
     @genres = []
     genre_titles.each do |title|
       @genres << Genre.find_or_create_by(title: title)
     end
   end
-
-
-
 
 end
