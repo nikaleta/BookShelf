@@ -3,16 +3,9 @@ class BooksController < ApplicationController
   before_action :find_author, only: [:update, :create]
   before_action :find_genres, only: [:update, :create]
 
-
   def new
     @book = Book.new
     authorize! :new, @book
-  end
-
-  def authors
-    if request.post? then
-    @authors = (params[:search])
-    end
   end
 
   def index
@@ -42,7 +35,6 @@ class BooksController < ApplicationController
   def destroy
     authorize! :destroy, @book
     @book.destroy
-
     redirect_to books_path
   end
 
