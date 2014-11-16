@@ -1,26 +1,31 @@
 <style>
-.part_right{
-	float:right;
+
+
+.book_cover{
+	height: 250px;
+	width: 180px;
+	float:left;
+	margin-top:10px;
+	margin-right:20px;
 }
 
-.part_left{
-	float:left;
-}
-.part_right{
-	margin-top:20px;
-  height: 180px;
-  width: 180px;
-}
+
 .wrapper_show{
-	width:700px;
 	margin:auto;
+	width:600px;
+}
+.book_title{
+	font-size:26px;
+}
+.book_author{
+	font-size:20px;
+	padding-left:10px;
 }
 
 </style>
 
-<div class="container">
+
 	<div class="wrapper_show">
-	<div class="part_left">
 	<ul class="nav nav-pills">
 		<li class="active"><% if can? :update, @book %>
 			<%= link_to "Edit", edit_book_path(@book) %>
@@ -31,27 +36,20 @@
 		<li class="active"><% if can? :create, @book %>
 			<%= link_to "New Book", new_book_path %>
 		<% end %></li>
+		<li class="active"><%= link_to "Back", books_path %></li>
 	</ul>
-<h1>Book</h1>
-<p>
-	<strong>Title:</strong>
-	<%= @book.title %>
-</p>
-<p>
-	<strong>Author:</strong>
-	<%= @book.author.name %>
-</p>
-<p>
-	<strong>Description:</strong>
-	<%= @book.description %>
-</p>
-<p>
-	<strong>Publication:</strong>
-	<%= @book.publication %>
-</p>
+<div style="float:left; width:400px; margin-top:20px;">
+<p class="book_title"><%= @book.title %></p>
+<p><%= @book.description %></p>
+<span>by</span><a class="book_author" href="#"><%= @book.author.name %></a>
+<p>Genres: <%= @book.genres.map { |genre| genre.title }.join(", ") %></p>
+<% if @book.publication %>
+<p>Published in <%= @book.publication %></p>
+<% else %>
+<% end %>
+<p><%= rating_for @book, "title", :disable_after_rate => true %></p>
 </div>
-<p class="part_right">
-	<%= image_tag @book.cover.url(:small) %>
-</p>
-</div>
-</div>
+
+<% if @book.cover.url %>
+<%= image_tag @book.cover.url, :class => "book_cover" %>
+<% end %>
